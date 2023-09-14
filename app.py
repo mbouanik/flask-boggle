@@ -8,7 +8,7 @@ boggle_game = Boggle()
 
 @app.route("/")
 def home():
-    session.get("board", boggle_game.make_board())
+    session["board"] = session.get("board", boggle_game.make_board())
     return render_template("app.html", game=session["board"])
 
 

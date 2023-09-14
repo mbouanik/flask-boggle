@@ -1,18 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boggle</title>
-  </head>
-  <body>
-    <h1>Boggle Game</h1>
+{% extends 'base.html' %} {% block title%} Boggle Game {% endblock %} {% block
+content %}
+<div class="title">
+  <h1>Boggle Game</h1>
+</div>
 
-    {{game}}
-    <form action="/check_valid_word" method="post">
-      <label for="word">Word </label>
-      <input type="text" name="word" placeholder="Enter Word" />
-      <button>Submit</button>
-    </form>
-  </body>
-</html>
+<div class="board">
+  <table>
+    {% for board in game: %}
+    <tr>
+      {% for letter in board%}
+      <td>{{letter}}</td>
+      {% endfor%}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<div class="form">
+  <form action="/check_valid_word" method="post">
+    <!-- <label for="word">Find Word: </label> -->
+    <input
+      type="text"
+      name="word"
+      placeholder="Press Enter to submit"
+      required
+    />
+    <button>Submit</button>
+  </form>
+</div>
+
+{% endblock %}
