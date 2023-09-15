@@ -1,9 +1,18 @@
 {% extends 'base.html' %} {% block title%} Boggle Game {% endblock %} {% block
 content %}
+<div class="dashboard">
+  <div class="score">
+    <h1>Score: <span id="score">0</span></h1>
+  </div>
+
+  <div class="timer">
+    <h1>Timer: <span id="timer">60</span></h1>
+  </div>
+</div>
+
 <div class="title">
   <h1>Boggle Game</h1>
 </div>
-
 <div class="board">
   <table>
     {% for board in game: %}
@@ -16,9 +25,10 @@ content %}
   </table>
 </div>
 <div class="form">
-  <form action="/check_valid_word" method="post">
+  <form id="form" action="/check_valid_word" method="post">
     <!-- <label for="word">Find Word: </label> -->
     <input
+      id="word"
       type="text"
       name="word"
       placeholder="Press Enter to submit"

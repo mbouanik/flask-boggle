@@ -7,8 +7,16 @@
     <title>{% block title%} {% endblock%}</title>
   </head>
   <body>
+    <nav class="navbar">
+      <div class="nav-button">
+        <a href="/new-board">New Board</a>
+      </div>
+    </nav>
+    <div id="notification" class="notification"></div>
     {% block content %} {% endblock%}
 
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="/static/app.js"></script>
   </body>
 </html>

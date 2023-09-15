@@ -3,7 +3,27 @@ body {
   color: white;
   font-family: Helvetica, sans-serif;
   font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
+
+nav {
+  background-color: rgba(127, 255, 212, 0.253);
+  padding: 1rem;
+}
+
+nav a {
+  padding: 0.5rem;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-button a:hover {
+  background-color: rgb(31, 124, 119);
+  border-radius: 1rem;
+  padding: 0.7rem;
+}
+
 table {
   color: white;
   font-size: 1.5rem;
@@ -12,20 +32,20 @@ td {
   border: solid white 2px;
   padding: 2rem;
 }
+
 input {
   font-size: 1rem;
   padding: 1rem;
   border-radius: 1rem;
   border: none;
-  width: 100%;
 }
 button {
-  padding: 0.5rem 1.5rem 0.7rem 1.5rem;
+  padding: 1rem;
   border-radius: 1rem;
+  font-size: 1rem;
   border: none;
   color: white;
   background-color: rgba(127, 255, 212, 0.462);
-  display: none;
 }
 
 .board,
@@ -38,4 +58,36 @@ button {
 .form {
   padding: 2rem;
   font-size: 1.5rem;
+}
+
+.good {
+  background-color: rgb(0, 255, 0, 0.1);
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  position: absolute;
+  border-radius: 1rem;
+}
+.bad {
+  background-color: rgb(255, 0, 0, 0.5);
+  color: white;
+  padding: 1rem;
+  font-size: 1.5rem;
+  position: absolute;
+  border-radius: 1rem;
+}
+
+.notification {
+  width: 100%;
+  /* padding: 1rem; */
+}
+
+.dashboard {
+  /* display: flex; */
+}
+.timer {
+  float: right;
+}
+.score {
+  float: left;
 }
