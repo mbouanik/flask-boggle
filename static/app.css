@@ -27,7 +27,9 @@ nav a {
 table {
   color: white;
   font-size: 1.5rem;
+  background-color: rgba(127, 255, 212, 0.253);
 }
+
 td {
   border: solid white 2px;
   padding: 2rem;
@@ -47,10 +49,15 @@ button {
   color: white;
   background-color: rgba(127, 255, 212, 0.462);
 }
+.main {
+  display: flex;
+  justify-content: center;
+}
 
 .board,
 .title,
-.form {
+.form,
+.word-found {
   display: flex;
   justify-content: center;
 }
@@ -79,15 +86,29 @@ button {
 
 .notification {
   width: 100%;
-  /* padding: 1rem; */
+  padding: 1rem;
 }
 
 .dashboard {
-  /* display: flex; */
+  display: flex;
+  justify-content: center;
+  /* padding: 0; */
 }
 .timer {
-  float: right;
+  padding: 0rem 0rem 0rem 2rem;
 }
 .score {
-  float: left;
+  padding: 0rem 0rem 0rem 2rem;
+}
+
+.played {
+  padding: 0rem 2rem 0rem 0rem;
+}
+
+highest-score {
+  padding: 0rem 0rem 0rem 2rem;
+}
+
+.word-found {
+  padding-right: 10rem;
 }

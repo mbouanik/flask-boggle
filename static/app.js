@@ -4,11 +4,17 @@ const notification = $("#notification");
 const score = $("#score");
 const button = $("button");
 const timer = $("#timer");
-
+const games = $("#game-played");
+const highestScore = $("#highest-score");
+const wordFound = {};
 notification.hide();
-setTimeout(() => {
+
+setTimeout(async () => {
+  const res = await endOfGame();
   input.prop("disabled", true);
   button.prop("disabled", true);
+  games.html(`${parseInt(games.html()) + 1}`);
+  highestScore.html(`${res["highest-score"]}`);
 }, 60000);
 
 setInterval(() => {
@@ -17,10 +23,16 @@ setInterval(() => {
   }
 }, 1000);
 
-console.log(notification);
+async function endOfGame() {
+  const res = await axios.post("/end-of-game", {
+    score: score.html(),
+  });
+
+  return res.data;
+}
+
 form.on("submit", (evt) => {
   evt.preventDefault();
-  console.log(input.val());
   checkValidWord(input.val().length);
   input.val("");
   setTimeout(() => {
@@ -29,30 +41,34 @@ form.on("submit", (evt) => {
 });
 
 async function checkValidWord(len) {
+  word = input.val().toLowerCase();
   const res = await axios.post("/check_valid_word/", {
     word: input.val(),
   });
 
-  console.log(res.data);
   notification.removeClass("good bad");
   notification.hide();
-  if (res.data["result"] == "ok") {
-    notification.html(`Word found`);
-    notification.toggleClass("good");
-    notification.show(700);
-    console.log(score.html());
-    score.html(`${parseInt(score.html()) + len}`);
-  } else if (res.data["result"] == "not-on-board") {
-    notification.html("Not on the Board");
+  if (word in wordFound) {
+    notification.html("Word Already found");
     notification.toggleClass("bad");
     notification.show(700);
   } else {
-    notification.html("Not a Word");
-    notification.toggleClass("bad");
-    notification.show(700);
+    if (res.data["result"] == "ok") {
+      notification.html(`Word found`);
+      notification.toggleClass("good");
+      notification.show(700);
+      wordFound[word] = wordFound.length;
+      $("#word-found").append(`<li>${word} </li>`);
+      score.html(`${parseInt(score.html()) + word.length}`);
+    } else if (res.data["result"] == "not-on-board") {
+      notification.html("Not on the Board");
+      notification.toggleClass("bad");
+      notification.show(700);
+    } else {
+      notification.html("Not a Word");
+      notification.toggleClass("bad");
+      notification.show(700);
+    }
   }
 }
-
-// function notification(){
-
-// }
+$("input:text:visible:first").focus();
