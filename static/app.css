@@ -13,7 +13,7 @@ nav {
 }
 
 nav a {
-  padding: 0.5rem;
+  padding: 0.7rem;
   text-decoration: none;
   color: white;
 }
@@ -24,6 +24,13 @@ nav a {
   padding: 0.7rem;
 }
 
+.nav-button a {
+  background-color: rgba(127, 255, 212, 0.253);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: white;
+}
 table {
   color: white;
   font-size: 1.5rem;
@@ -111,4 +118,21 @@ highest-score {
 
 .word-found {
   padding-right: 10rem;
+}
+
+.end-game {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 3rem;
+  padding: 1.7rem;
+}
+
+.end-game a {
+  padding: 1.5rem;
+}
+
+.end-game a:hover {
+  background-color: rgb(14, 144, 101);
+  padding: 1.5rem;
 }

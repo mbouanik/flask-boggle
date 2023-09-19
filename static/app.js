@@ -11,11 +11,11 @@ notification.hide();
 
 setTimeout(async () => {
   $("#boggle").replaceWith(
-    `<h1> Congratulation! ${
-      parseInt(score.html()) > parseInt(res["highest-score"])
+    `<h1 class="end-game"> Congratulation! ${
+      parseInt(score.html()) > parseInt(highestScore.html())
         ? "New High Score"
         : " Your Score is "
-    } ${score.html()}</h1>`
+    } ${score.html()} </h1> <div class="nav-button end-game"><a href='/'> Replay </a></div>`
   );
   const res = await endOfGame();
   input.prop("disabled", true);
@@ -23,7 +23,7 @@ setTimeout(async () => {
   gamesPlayed.html(`${parseInt(gamesPlayed.html()) + 1}`);
   highestScore.html(`${res["highest-score"]}`);
   console.log(`${score.html()} ${res["highest-score"]}`);
-}, 6000);
+}, 60000);
 
 setInterval(() => {
   if (parseInt(timer.html()) > 0) {
