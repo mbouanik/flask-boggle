@@ -23,13 +23,13 @@ def home():
     )
 
 
-@app.route("/check-word", methods=["POST"])
+@app.route("/check-word", methods=["GET", "POST"])
 def check_word():
     """
     check for a valid word
     """
-    print(request.json["word"])
-    word = request.json["word"].lower()
+    # print(request.json["word"])
+    word = request.args["word"].lower()
 
     result = boggle_game.check_valid_word(session["board"], word)
     return jsonify({"result": result})
@@ -44,12 +44,12 @@ def new_baord():
     return redirect("/")
 
 
-@app.route("/end-of-game", methods=["POST"])
+@app.route("/end-of-game", methods=["GET", "POST"])
 def end_of_game():
     """
     check for new high score update the number of game played
     """
-    res = request.json["score"]
+    res = request.args["score"]
     session["game-played"] = session.get("game-played", 0) + 1
     session["highest-score"] = max(session["highest-score"], res)
     return jsonify(

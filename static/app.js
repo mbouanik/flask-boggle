@@ -42,8 +42,10 @@ form.on("submit", (evt) => {
 
 async function checkValidWord() {
   word = input.val().toLowerCase();
-  const res = await axios.post("/check-word", {
-    word: input.val(),
+  const res = await axios.get("/check-word", {
+    params: {
+      word: input.val(),
+    },
   });
 
   notification.removeClass("good bad");
