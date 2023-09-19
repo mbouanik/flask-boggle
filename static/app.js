@@ -4,7 +4,7 @@ const notification = $("#notification");
 const score = $("#score");
 const button = $("button");
 const timer = $("#timer");
-const games = $("#game-played");
+const gamesPlayed = $("#game-played");
 const highestScore = $("#highest-score");
 const wordFound = {};
 notification.hide();
@@ -13,7 +13,7 @@ setTimeout(async () => {
   const res = await endOfGame();
   input.prop("disabled", true);
   button.prop("disabled", true);
-  games.html(`${parseInt(games.html()) + 1}`);
+  gamesPlayed.html(`${parseInt(gamesPlayed.html()) + 1}`);
   highestScore.html(`${res["highest-score"]}`);
 }, 60000);
 
@@ -25,7 +25,7 @@ setInterval(() => {
 
 async function endOfGame() {
   const res = await axios.post("/end-of-game", {
-    score: score.html(),
+    score: parseInt(score.html()),
   });
 
   return res.data;
@@ -33,16 +33,16 @@ async function endOfGame() {
 
 form.on("submit", (evt) => {
   evt.preventDefault();
-  checkValidWord(input.val().length);
+  checkValidWord();
   input.val("");
   setTimeout(() => {
     notification.slideUp(500);
   }, 2000);
 });
 
-async function checkValidWord(len) {
+async function checkValidWord() {
   word = input.val().toLowerCase();
-  const res = await axios.post("/check_valid_word/", {
+  const res = await axios.post("/check-word", {
     word: input.val(),
   });
 
@@ -71,4 +71,4 @@ async function checkValidWord(len) {
     }
   }
 }
-$("input:text:visible:first").focus();
+// $("input:text:visible:first").focus();

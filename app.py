@@ -8,6 +8,10 @@ boggle_game = Boggle()
 
 @app.route("/")
 def home():
+    """
+    initiazing the home page
+    board game, score, timer...
+    """
     session["board"] = session.get("board", boggle_game.make_board())
     session["game-played"] = session.get("game-played", 0)
     session["highest-score"] = session.get("highest-score", 0)
@@ -19,25 +23,34 @@ def home():
     )
 
 
-@app.route("/check_valid_word/", methods=["POST"])
-def check_valididty():
+@app.route("/check-word", methods=["POST"])
+def check_word():
+    """
+    check for a valid word
+    """
+    print(request.json["word"])
     word = request.json["word"].lower()
-    print(word)
+
     result = boggle_game.check_valid_word(session["board"], word)
     return jsonify({"result": result})
 
 
 @app.route("/new-board")
 def new_baord():
+    """
+    Create a new board
+    """
     session["board"] = boggle_game.make_board()
     return redirect("/")
 
 
 @app.route("/end-of-game", methods=["POST"])
 def end_of_game():
-    res = int(request.json["score"])
-    print(res)
-    session["game-played"] = session["game-played"] + 1
+    """
+    check for new high score update the number of game played
+    """
+    res = request.json["score"]
+    session["game-played"] = session.get("game-played", 0) + 1
     session["highest-score"] = max(session["highest-score"], res)
     return jsonify(
         {"played": session["game-played"], "highest-score": session["highest-score"]}
