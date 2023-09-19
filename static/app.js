@@ -10,12 +10,20 @@ const wordFound = {};
 notification.hide();
 
 setTimeout(async () => {
+  $("#boggle").replaceWith(
+    `<h1> Congratulation! ${
+      parseInt(score.html()) > parseInt(res["highest-score"])
+        ? "New High Score"
+        : " Your Score is "
+    } ${score.html()}</h1>`
+  );
   const res = await endOfGame();
   input.prop("disabled", true);
   button.prop("disabled", true);
   gamesPlayed.html(`${parseInt(gamesPlayed.html()) + 1}`);
   highestScore.html(`${res["highest-score"]}`);
-}, 60000);
+  console.log(`${score.html()} ${res["highest-score"]}`);
+}, 6000);
 
 setInterval(() => {
   if (parseInt(timer.html()) > 0) {
@@ -24,7 +32,7 @@ setInterval(() => {
 }, 1000);
 
 async function endOfGame() {
-  const res = await axios.post("/end-of-game", {
+  const res = await axios.post("/end-game", {
     score: parseInt(score.html()),
   });
 

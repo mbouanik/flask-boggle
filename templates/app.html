@@ -1,59 +1,59 @@
 {% extends 'base.html' %} {% block title%} Boggle Game {% endblock %} {% block
 content %}
+<div id="boggle">
+  <div class="dashboard">
+    <div class="played">
+      <h2>Played: <span id="game-played">{{played}}</span></h2>
+    </div>
+    <div class="highest-score">
+      <h2>Highest Score : <span id="highest-score">{{highest_score}}</span></h2>
+    </div>
+    <div class="score">
+      <h2>Score: <span id="score"> 0 </span></h2>
+    </div>
+    <div class="timer">
+      <h2>Timer: <span id="timer"> 60 </span></h2>
+    </div>
+  </div>
 
-<div class="dashboard">
-  <div class="played">
-    <h2>Played: <span id="game-played">{{played}}</span></h2>
-  </div>
-  <div class="highest-score">
-    <h2>Highest Score : <span id="highest-score">{{highest_score}}</span></h2>
-  </div>
-  <div class="score">
-    <h2>Score: <span id="score"> 0 </span></h2>
-  </div>
-  <div class="timer">
-    <h2>Timer: <span id="timer"> 60 </span></h2>
+  <div class="main">
+    <div class="word-found">
+      <ul id="word-found">
+        Words Found:
+      </ul>
+    </div>
+
+    <div>
+      <div class="title">
+        <h1>Boggle Game</h1>
+      </div>
+      <div class="board">
+        <table>
+          {% for board in game: %}
+          <tr>
+            {% for letter in board%}
+            <td>{{letter}}</td>
+            {% endfor%}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <div class="form">
+        <form id="form" action="/check-word" method="post">
+          <!-- <label for="word">Find Word: </label> -->
+          <input
+            id="word"
+            type="text"
+            name="word"
+            placeholder="Press Enter to submit"
+            required
+            autofocus
+          />
+          <button>Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="main">
-  <div class="word-found">
-    <ul id="word-found">
-      Words Found:
-    </ul>
-  </div>
-
-  <div>
-    <div class="title">
-      <h1>Boggle Game</h1>
-    </div>
-    <div class="board">
-      <table>
-        {% for board in game: %}
-        <tr>
-          {% for letter in board%}
-          <td>{{letter}}</td>
-          {% endfor%}
-        </tr>
-        {% endfor %}
-      </table>
-    </div>
-
-    <div class="form">
-      <form id="form" action="/check-word" method="post">
-        <!-- <label for="word">Find Word: </label> -->
-        <input
-          id="word"
-          type="text"
-          name="word"
-          placeholder="Press Enter to submit"
-          required
-          autofocus
-        />
-        <button>Submit</button>
-      </form>
-    </div>
-  </div>
-</div>
-
 {% endblock %}

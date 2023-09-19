@@ -44,12 +44,12 @@ def new_baord():
     return redirect("/")
 
 
-@app.route("/end-of-game", methods=["GET", "POST"])
+@app.route("/end-game", methods=["GET", "POST"])
 def end_of_game():
     """
     check for new high score update the number of game played
     """
-    res = request.args["score"]
+    res = request.json["score"]
     session["game-played"] = session.get("game-played", 0) + 1
     session["highest-score"] = max(session["highest-score"], res)
     return jsonify(

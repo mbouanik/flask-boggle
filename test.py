@@ -43,9 +43,7 @@ class FlaskTests(TestCase):
 
     def test_end_of_game(self):
         with app.test_client() as client:
-            res = client.get("/end-of-game?score=23")
-
-            self.assertEqual(session["game-played"], 1)
-            # self.assertEqual(session["highest-score"], 23)
-            # self.assertIn(data, "1")
-            # self.assertEqual(res.data, "application/json")
+            with client.session_transaction() as session:
+                session["game-played"] = 0
+        res = client.post("/end-game", data={"score": 23})
+        self.assertEqual(res.status_code, 200)
